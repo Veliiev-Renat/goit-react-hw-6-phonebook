@@ -8,9 +8,7 @@ export default function Contact(){
 const contacts = useSelector(state=>state.counter.contacts)
 const dispatch = useDispatch()
 
-const onClick=(e)=>{
-    dispatch(removeContact(e.target.id))
-}
+
 const filter = useSelector(state=>state.counter.filter)
 const filteredArray=filter?contacts.filter(contact=>contact.name.toLowerCase().includes(filter.toLowerCase())):contacts
 
@@ -19,10 +17,11 @@ const filteredArray=filter?contacts.filter(contact=>contact.name.toLowerCase().i
         {filteredArray.map((contact)=>(
         <li key={contact.id} className={style.item}>
            <p className={style.text}>{contact.name} : {contact.number}</p> 
-           <button type="button" onClick={onClick} id={contact.id} className={style.button}>delete</button>
+           <button type="button" onClick={()=>{dispatch(removeContact(contact.id))}}  className={style.button}>delete</button>
         </li>
         ))}    
     </ul>
    )     
 }
+
 
